@@ -1,0 +1,15 @@
+replicas: 2
+name: springboot-app
+
+image:
+  repository: khajaehtesham/springboot-app
+  tag: latest
+
+container:
+  name: springboot-app
+service:
+  name: springboot-app-service
+  type: ClusterIP
+  port: 80
+  targetPort: 9000
+
