@@ -1,5 +1,5 @@
 FROM openjdk:18
-RUN apt-get update 
+RUN apt-get update && apt upgrade -y
 WORKDIR /app
 COPY target/springboot-0.0.1-SNAPSHOT.jar /app
 EXPOSE 8080
