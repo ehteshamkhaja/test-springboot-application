@@ -152,7 +152,7 @@ jobs:
        run: aws eks --region us-west-1 update-kubeconfig --name dev-eks-cluster
        
      - name: Execute the shell script to deploy application using helm
-       run:  ls && bash deploy-app.sh
+       run:  ls && helm uninstall springboot-app && bash deploy-app.sh
 
      - name: Check the deployment status
        run: kubectl get all 
