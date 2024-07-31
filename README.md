@@ -15,6 +15,11 @@ Please find the below steps followed to build this project.
    Issues faced - i have faced ** White label error page here ** initially while i was testing with image i built using single docker container, i was unable to access webpage. i have modified the file src/main/java/com/docker/springboot/SpringbootApplication.java to have /welcome as the mapping to provide as url to access my webpage. ** 
    
 6. Once the application is built, with the help of sonar scanner ( please create a project from url  https://sonarcloud.io/ to scan for code coverage, i have added the organization and project usecase in main.yml file )
+
+Please find the screenshot of the report in sonarcloud scanner. 
+
+<img width="1728" alt="image" src="https://github.com/user-attachments/assets/7db71b49-a365-49e4-85b0-6feb73dc4b3e">
+
    
 7. We need to dockerize the application using dockerfile present in this repository, with the help of docker, i have created the image and tagged the image so that we can push the image to ECR.
 
