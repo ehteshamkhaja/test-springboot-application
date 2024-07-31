@@ -62,6 +62,9 @@ name: 'Create EKS using Terraform and deploy the java containerized application'
 on:
   push:
     branches: [ "master" ]
+    paths-ignore:
+      - 'manifests/**'
+      - 'README.md'
   pull_request:
 
 permissions:
@@ -172,7 +175,7 @@ jobs:
           exit-code: '1'
           ignore-unfixed: true
           vuln-type: 'os,library'
-          severity: 'LOW'  #need to keep CRITICAL, HIGH
+          severity: 'CRITICAL,HIGH'
 
   deploy:
     needs: build
