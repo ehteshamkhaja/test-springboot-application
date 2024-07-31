@@ -21,14 +21,14 @@ Please find the below steps followed to build this project.
 8. For storing the images, this project uses ECR in AWS cloud. Once the docker images are created in pipeline, images would be pushed to ECR.
 9. We have also scanned the docker images using apache trivy to look for vulnerabilities.
 
-    ** Here i am getting the vulnerability with the packages for glibc,glibc-minimal-langpack,glibc-common,libgcc,libgcrypt,libnghttp2,libstdc++ and openssl-libs for the patches , i have tried to pickup the latest image from dockerhub which is updated 2 days back, mentioning it has 0 vulnerabilities, today i could see these with lower version compared to one's updated in CVE database of trivy. we may need to see it after few days if it gets updated with the new one's ** 
+    **Here i am getting the vulnerability with the packages for glibc,glibc-minimal-langpack,glibc-common,libgcc,libgcrypt,libnghttp2,libstdc++ and openssl-libs for the patches , i have tried to pickup the latest image from dockerhub which is updated 2 days back, mentioning it has 0 vulnerabilities, today i could see these with lower version compared to one's updated in CVE database of trivy. we may need to see it after few days if it gets updated with the new one's** 
 
-   ** for testing i have mentioned severity as LOW (reference line number 175 in yml file) ** 
+   **for testing i have mentioned severity as LOW (reference line number 175 in yml file)** 
     
    
 11. once  the Images are scanned , we can then proceed to the next step to deploy the image on to the EKS cluster, we have a directory called manifests.
     
- ** I have used the helm to deploy the application, using the shell script, please modify the variable values in the shell script accordingly. ** 
+ **I have used the helm to deploy the application, using the shell script, please modify the variable values in the shell script accordingly.** 
 
  I have added the command in the pipeline main.yml file to execute the shell script to deploy application using helm charts.
 
