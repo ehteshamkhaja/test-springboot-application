@@ -9,7 +9,7 @@ container:
   name: springboot-app
 service:
   name: springboot-app-service
-  type: ClusterIP
+  type: LoadBalancer
   port: 80
   targetPort: 9000
 
