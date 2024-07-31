@@ -50,7 +50,8 @@ reference from scan report :
  I have added the command in the pipeline main.yml file to execute the shell script to deploy application using helm charts.
 
 
+Access the below URL to access webpage. 
 
-Test : http://<URL>/welcome
+Test : http://<URL>:8080/welcome
 
 
