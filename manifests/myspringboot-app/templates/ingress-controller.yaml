@@ -4,6 +4,9 @@ metadata:
   labels:
     app.kubernetes.io/instance: ingress-nginx
     app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/managed-by : Helm 
+    meta.helm.sh/release-name: springboot-app
+    meta.helm.sh/release-namespace: default
   name: ingress-nginx
 ---
 apiVersion: v1
@@ -16,6 +19,9 @@ metadata:
     app.kubernetes.io/name: ingress-nginx
     app.kubernetes.io/part-of: ingress-nginx
     app.kubernetes.io/version: 1.11.1
+    app.kubernetes.io/managed-by : Helm 
+    meta.helm.sh/release-name: springboot-app
+    meta.helm.sh/release-namespace: default
   name: ingress-nginx
   namespace: ingress-nginx
 ---
@@ -29,6 +35,9 @@ metadata:
     app.kubernetes.io/name: ingress-nginx
     app.kubernetes.io/part-of: ingress-nginx
     app.kubernetes.io/version: 1.11.1
+    app.kubernetes.io/managed-by : Helm 
+    meta.helm.sh/release-name: springboot-app
+    meta.helm.sh/release-namespace: default
   name: ingress-nginx-admission
   namespace: ingress-nginx
 ---
@@ -41,6 +50,9 @@ metadata:
     app.kubernetes.io/name: ingress-nginx
     app.kubernetes.io/part-of: ingress-nginx
     app.kubernetes.io/version: 1.11.1
+    app.kubernetes.io/managed-by : Helm 
+    meta.helm.sh/release-name: springboot-app
+    meta.helm.sh/release-namespace: default
   name: ingress-nginx
   namespace: ingress-nginx
 rules:
@@ -131,6 +143,9 @@ metadata:
     app.kubernetes.io/name: ingress-nginx
     app.kubernetes.io/part-of: ingress-nginx
     app.kubernetes.io/version: 1.11.1
+    app.kubernetes.io/managed-by : Helm 
+    meta.helm.sh/release-name: springboot-app
+    meta.helm.sh/release-namespace: default
   name: ingress-nginx-admission
   namespace: ingress-nginx
 rules:
@@ -150,6 +165,9 @@ metadata:
     app.kubernetes.io/name: ingress-nginx
     app.kubernetes.io/part-of: ingress-nginx
     app.kubernetes.io/version: 1.11.1
+    app.kubernetes.io/managed-by : Helm 
+    meta.helm.sh/release-name: springboot-app
+    meta.helm.sh/release-namespace: default
   name: ingress-nginx
 rules:
 - apiGroups:
@@ -232,6 +250,9 @@ metadata:
     app.kubernetes.io/name: ingress-nginx
     app.kubernetes.io/part-of: ingress-nginx
     app.kubernetes.io/version: 1.11.1
+    app.kubernetes.io/managed-by : Helm 
+    meta.helm.sh/release-name: springboot-app
+    meta.helm.sh/release-namespace: default
   name: ingress-nginx-admission
 rules:
 - apiGroups:
@@ -251,6 +272,9 @@ metadata:
     app.kubernetes.io/name: ingress-nginx
     app.kubernetes.io/part-of: ingress-nginx
     app.kubernetes.io/version: 1.11.1
+    app.kubernetes.io/managed-by : Helm 
+    meta.helm.sh/release-name: springboot-app
+    meta.helm.sh/release-namespace: default
   name: ingress-nginx
   namespace: ingress-nginx
 roleRef:
@@ -271,6 +295,9 @@ metadata:
     app.kubernetes.io/name: ingress-nginx
     app.kubernetes.io/part-of: ingress-nginx
     app.kubernetes.io/version: 1.11.1
+    app.kubernetes.io/managed-by : Helm 
+    meta.helm.sh/release-name: springboot-app
+    meta.helm.sh/release-namespace: default
   name: ingress-nginx-admission
   namespace: ingress-nginx
 roleRef:
@@ -290,6 +317,9 @@ metadata:
     app.kubernetes.io/name: ingress-nginx
     app.kubernetes.io/part-of: ingress-nginx
     app.kubernetes.io/version: 1.11.1
+    app.kubernetes.io/managed-by : Helm 
+    meta.helm.sh/release-name: springboot-app
+    meta.helm.sh/release-namespace: default
   name: ingress-nginx
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -309,6 +339,9 @@ metadata:
     app.kubernetes.io/name: ingress-nginx
     app.kubernetes.io/part-of: ingress-nginx
     app.kubernetes.io/version: 1.11.1
+    app.kubernetes.io/managed-by : Helm 
+    meta.helm.sh/release-name: springboot-app
+    meta.helm.sh/release-namespace: default
   name: ingress-nginx-admission
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -330,6 +363,9 @@ metadata:
     app.kubernetes.io/name: ingress-nginx
     app.kubernetes.io/part-of: ingress-nginx
     app.kubernetes.io/version: 1.11.1
+    app.kubernetes.io/managed-by : Helm 
+    meta.helm.sh/release-name: springboot-app
+    meta.helm.sh/release-namespace: default
   name: ingress-nginx-controller
   namespace: ingress-nginx
 ---
@@ -342,6 +378,9 @@ metadata:
     app.kubernetes.io/name: ingress-nginx
     app.kubernetes.io/part-of: ingress-nginx
     app.kubernetes.io/version: 1.11.1
+    app.kubernetes.io/managed-by : Helm 
+    meta.helm.sh/release-name: springboot-app
+    meta.helm.sh/release-namespace: default
   name: ingress-nginx-controller
   namespace: ingress-nginx
 spec:
@@ -364,6 +403,9 @@ spec:
     app.kubernetes.io/component: controller
     app.kubernetes.io/instance: ingress-nginx
     app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/managed-by : Helm 
+    meta.helm.sh/release-name: springboot-app
+    meta.helm.sh/release-namespace: default
   type: LoadBalancer
 ---
 apiVersion: v1
@@ -375,6 +417,9 @@ metadata:
     app.kubernetes.io/name: ingress-nginx
     app.kubernetes.io/part-of: ingress-nginx
     app.kubernetes.io/version: 1.11.1
+    app.kubernetes.io/managed-by : Helm 
+    meta.helm.sh/release-name: springboot-app
+    meta.helm.sh/release-namespace: default
   name: ingress-nginx-controller-admission
   namespace: ingress-nginx
 spec:
@@ -387,6 +432,9 @@ spec:
     app.kubernetes.io/component: controller
     app.kubernetes.io/instance: ingress-nginx
     app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/managed-by : Helm 
+    meta.helm.sh/release-name: springboot-app
+    meta.helm.sh/release-namespace: default
   type: ClusterIP
 ---
 apiVersion: apps/v1
@@ -398,6 +446,9 @@ metadata:
     app.kubernetes.io/name: ingress-nginx
     app.kubernetes.io/part-of: ingress-nginx
     app.kubernetes.io/version: 1.11.1
+    app.kubernetes.io/managed-by : Helm 
+    meta.helm.sh/release-name: springboot-app
+    meta.helm.sh/release-namespace: default
   name: ingress-nginx-controller
   namespace: ingress-nginx
 spec:
@@ -408,6 +459,9 @@ spec:
       app.kubernetes.io/component: controller
       app.kubernetes.io/instance: ingress-nginx
       app.kubernetes.io/name: ingress-nginx
+      app.kubernetes.io/managed-by : Helm 
+      meta.helm.sh/release-name: springboot-app
+      meta.helm.sh/release-namespace: default
   strategy:
     rollingUpdate:
       maxUnavailable: 1
@@ -420,6 +474,9 @@ spec:
         app.kubernetes.io/name: ingress-nginx
         app.kubernetes.io/part-of: ingress-nginx
         app.kubernetes.io/version: 1.11.1
+        app.kubernetes.io/managed-by : Helm 
+        meta.helm.sh/release-name: springboot-app
+        meta.helm.sh/release-namespace: default
     spec:
       containers:
       - args:
@@ -521,6 +578,9 @@ metadata:
     app.kubernetes.io/name: ingress-nginx
     app.kubernetes.io/part-of: ingress-nginx
     app.kubernetes.io/version: 1.11.1
+    app.kubernetes.io/managed-by : Helm 
+    meta.helm.sh/release-name: springboot-app
+    meta.helm.sh/release-namespace: default
   name: ingress-nginx-admission-create
   namespace: ingress-nginx
 spec:
@@ -532,7 +592,10 @@ spec:
         app.kubernetes.io/name: ingress-nginx
         app.kubernetes.io/part-of: ingress-nginx
         app.kubernetes.io/version: 1.11.1
-      name: ingress-nginx-admission-create
+        app.kubernetes.io/managed-by : Helm 
+        meta.helm.sh/release-name: springboot-app
+        meta.helm.sh/release-namespace: default
+        name: ingress-nginx-admission-create
     spec:
       containers:
       - args:
@@ -572,6 +635,9 @@ metadata:
     app.kubernetes.io/name: ingress-nginx
     app.kubernetes.io/part-of: ingress-nginx
     app.kubernetes.io/version: 1.11.1
+    app.kubernetes.io/managed-by : Helm 
+    meta.helm.sh/release-name: springboot-app
+    meta.helm.sh/release-namespace: default
   name: ingress-nginx-admission-patch
   namespace: ingress-nginx
 spec:
@@ -625,6 +691,9 @@ metadata:
     app.kubernetes.io/name: ingress-nginx
     app.kubernetes.io/part-of: ingress-nginx
     app.kubernetes.io/version: 1.11.1
+    app.kubernetes.io/managed-by : Helm 
+    meta.helm.sh/release-name: springboot-app
+    meta.helm.sh/release-namespace: default
   name: nginx
 spec:
   controller: k8s.io/ingress-nginx
@@ -638,6 +707,9 @@ metadata:
     app.kubernetes.io/name: ingress-nginx
     app.kubernetes.io/part-of: ingress-nginx
     app.kubernetes.io/version: 1.11.1
+    app.kubernetes.io/managed-by : Helm 
+    meta.helm.sh/release-name: springboot-app
+    meta.helm.sh/release-namespace: default
   name: ingress-nginx-admission
 webhooks:
 - admissionReviewVersions:
