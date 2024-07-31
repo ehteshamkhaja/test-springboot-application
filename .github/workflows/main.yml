@@ -97,18 +97,109 @@ jobs:
     - name: Terraform Init
       run: cd eks && terraform init
 
-    - name: Run Trivy vulnerability scanner in IaC mode
-      uses: aquasecurity/trivy-action@0.20.0
-      with:
-          scan-type: 'config'
-          hide-progress: true
-          format: 'sarif'
-          output: 'trivy-results.sarif'
+
+    # Generates an execution plan for Terraform
+    - name: Terraform Plan
+      run: cd eks && terraform plan -input=false
+
+      # On push to "master", build or change infrastructure according to Terraform configuration files
+      # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
+    - name: Terraform Apply
+      run: cd eks && terraform apply -auto-approve -input=false
+
+
+  build:
+    
+
+    runs-on: ubuntu-latest
+
+    steps:
+     - uses: actions/checkout@v4
+     - name: Set up JDK 17
+       uses: actions/setup-java@v4
+       with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+     - name: Build with Maven
+       run: mvn -B package --file pom.xml
+      
+     - uses: actions/checkout@v3
+       with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+     - name: Set up JDK 17
+       uses: actions/setup-java@v3
+       with:
+          java-version: 17
+          distribution: 'zulu' # Alternative distribution options are available.
+     - name: Cache SonarCloud packages
+       uses: actions/cache@v3
+       with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+     - name: Cache Maven packages
+       uses: actions/cache@v3
+       with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+     - name: Build and analyze
+       env:
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+       run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=sonarscan-project_sonarscan-project
+     
+     - name: Configure AWS credentials
+       uses: aws-actions/configure-aws-credentials@v2
+       with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID}}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-1
+     
+     - name: ECR login
+       run:  aws ecr get-login-password --region us-west-1 | docker login --username AWS --password-stdin 210613553230.dkr.ecr.us-west-1.amazonaws.com
+      
+
+     - name: Build and Push Docker Image
+       run: |
+         docker build -t springboot-app-githubactions .
+         docker tag springboot-app-githubactions:latest 210613553230.dkr.ecr.us-west-1.amazonaws.com/springboot-app-githubactions:latest
+         docker push 210613553230.dkr.ecr.us-west-1.amazonaws.com/springboot-app-githubactions:latest
+
+     - name: Run Trivy vulnerability scanner
+       uses: aquasecurity/trivy-action@0.20.0
+       with:
+          image-ref: '210613553230.dkr.ecr.us-west-1.amazonaws.com/springboot-app-githubactions:latest'
+          format: 'table'
           exit-code: '1'
           ignore-unfixed: true
+          vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
 
-   # - name: Upload Trivy scan results to GitHub Security tab
-   #   uses: github/codeql-action/upload-sarif@v2
-   #   with:
-   #       sarif_file: 'trivy-results.sarif'
+  deploy:
+    needs: build
+
+    runs-on: ubuntu-latest
+    steps:
+     - name: Checkout
+       uses: actions/checkout@v4
+
+     - name: install-aws-cli-action
+       uses: unfor19/install-aws-cli-action@v1
+      
+     - name: Configure AWS credentials
+       uses: aws-actions/configure-aws-credentials@v2
+       with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID}}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-1
+            
+     - name: Update Kube config file 
+       run: aws eks --region us-west-1 update-kubeconfig --name dev-eks-cluster
+       
+     - name: Execute the shell script to deploy application using helm
+       run:  ls && helm uninstall springboot-app && bash deploy-app.sh
+
+     - name: Check the deployment status
+       run: sleep 20 && kubectl get all && kubectl get ingress
