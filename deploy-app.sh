@@ -9,6 +9,7 @@ helm repo update eks
 helm install aws-load-balancer-controller eks/aws-load-balancer-controller  -n kube-system --set clusterName=$cluster_name  --set serviceAccount.create=false  --set serviceAccount.name=aws-load-balancer-controller --set region=us-west-1 --set vpcId=vpc-06a9dc1f8d2f9a5b1
 
 var=`helm list | grep $helmrelease`
+echo $var
 if [ -z "$var" ]
 then
      cd manifests && helm install $helmrelease myspringboot-app
