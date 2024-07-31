@@ -202,10 +202,7 @@ jobs:
        run: |
         helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 
-        helm upgrade --install ingress-nginx ingress-nginx \ 
-             --repo https://kubernetes.github.io/ingress-nginx \ 
-             --namespace ingress-nginx \
-             --create-namespace
+        helm upgrade --install ingress-nginx ingress-nginx --repo https://kubernetes.github.io/ingress-nginx --namespace ingress-nginx --create-namespace
        
      - name: Execute the shell script to deploy application using helm
        run:  ls && helm uninstall springboot-app && bash deploy-app.sh
