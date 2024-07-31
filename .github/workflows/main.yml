@@ -120,6 +120,12 @@ jobs:
         cache: maven
      - name: Build with Maven
        run: mvn -B package --file pom.xml
+      
+     - uses: javiertuya/sonarqube-action@main
+       with: 
+          github-token: ${{ secrets.GIT_TOKEN }}
+          sonar-token: ${{ secrets.SONAR_TOKEN }}
+          restore-artifact-name1: "test-coverage-files"
 
      - name: Build and Push Docker Image
        uses: mr-smithers-excellent/docker-build-push@v4
