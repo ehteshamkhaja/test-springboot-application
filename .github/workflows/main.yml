@@ -153,3 +153,6 @@ jobs:
        
      - name: Execute the shell script to deploy application using helm
        run:  ls && bash deploy-app.sh
+
+     - name: Check the deployment status
+       run: kubectl get all 
