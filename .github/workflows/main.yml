@@ -1,11 +1,11 @@
 # This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
 
-
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
 # separate terms of service, privacy policy, and support
 # documentation.
+
 # This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
 
@@ -197,6 +197,15 @@ jobs:
             
      - name: Update Kube config file 
        run: aws eks --region us-west-1 update-kubeconfig --name dev-eks-cluster
+
+     - name: Setup Ingress controller
+       run: |
+        helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+
+        helm upgrade --install ingress-nginx ingress-nginx \ 
+             --repo https://kubernetes.github.io/ingress-nginx \ 
+             --namespace ingress-nginx \
+             --create-namespace
        
      - name: Execute the shell script to deploy application using helm
        run:  ls && helm uninstall springboot-app && bash deploy-app.sh
