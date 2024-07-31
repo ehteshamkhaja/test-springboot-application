@@ -154,6 +154,10 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-west-1
           
+     - name: ECR login
+       run:  aws ecr get-login-password --region us-west-1 | docker login --username AWS --password-stdin 210613553230.dkr.ecr.us-west-1.amazonaws.com
+      
+          
      - name: Build and Push Docker Image
        uses: mr-smithers-excellent/docker-build-push@v4
        with:
