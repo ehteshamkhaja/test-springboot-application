@@ -3,6 +3,8 @@
 
 This project is to deploy the springboot application onto EKS Cluster.
 
+**For storing the state file, i have used s3 bucket, please refer the terraform block for the s3 bucket details in backend section.
+
 Please find the below steps followed to build this project. 
 
 1. First, Create the infrastructure using terraform , please find the source code in this git repository under eks directory.
