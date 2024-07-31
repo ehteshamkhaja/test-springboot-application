@@ -52,6 +52,6 @@ reference from scan report :
 
 Access the below URL to access webpage. 
 
-Test : http://<URL>:8080/welcome
+Test : http://URL:8080/welcome
 
 
