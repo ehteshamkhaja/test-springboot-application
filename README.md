@@ -23,9 +23,15 @@ Please find the below steps followed to build this project.
 
     **Here i am getting the vulnerability with the packages for glibc,glibc-minimal-langpack,glibc-common,libgcc,libgcrypt,libnghttp2,libstdc++ and openssl-libs for the patches , i have tried to pickup the latest image from dockerhub which is updated 2 days back, mentioning it has 0 vulnerabilities, today i could see these with lower version compared to one's updated in CVE database of trivy. we may need to see it after few days if it gets updated with the new one's** 
 
- Reference image used for testing, reverted back in dockerfile again.
+ Reference image used for testing, with the below image, vulnerability is reduced to count as 1.
  
  <img width="1395" alt="image" src="https://github.com/user-attachments/assets/87eba19e-af15-4379-9894-0585dabbd328">
+
+
+reference from scan report :
+
+  <img width="1395" alt="image" src="https://github.com/user-attachments/assets/44048293-81af-4110-ad60-926004762ccb">
+
 
    **for testing i have mentioned severity as LOW (reference line number 175 in yml file)** 
     
