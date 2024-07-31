@@ -155,4 +155,4 @@ jobs:
        run:  ls && helm uninstall springboot-app && bash deploy-app.sh
 
      - name: Check the deployment status
-       run: sleep 20 && kubectl get all 
+       run: sleep 20 && kubectl get all && kubectl get ingress
