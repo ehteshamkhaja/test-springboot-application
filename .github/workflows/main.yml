@@ -106,7 +106,7 @@ jobs:
 
 
   build:
-    needs: terraform
+    
 
     runs-on: ubuntu-latest
 
@@ -149,4 +149,4 @@ jobs:
        run: aws eks --region us-west-1 update-kubeconfig --name dev-eks-cluster
        
      - name: Execute the shell script to deploy application using helm
-       run:  bash deploy-app.sh
+       run:  ls 
