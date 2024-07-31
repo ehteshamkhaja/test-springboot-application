@@ -135,6 +135,9 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
+     - name: Checkout
+       uses: actions/checkout@v4
+
      - name: install-aws-cli-action
        uses: unfor19/install-aws-cli-action@v1
       
@@ -149,4 +152,4 @@ jobs:
        run: aws eks --region us-west-1 update-kubeconfig --name dev-eks-cluster
        
      - name: Execute the shell script to deploy application using helm
-       run:  ls 
+       run:  ls && bash deploy-app.sh
