@@ -163,3 +163,40 @@ jobs:
          docker build -t springboot-app-githubactions .
          docker tag springboot-app-githubactions:latest 210613553230.dkr.ecr.us-west-1.amazonaws.com/springboot-app-githubactions:latest
          docker push 210613553230.dkr.ecr.us-west-1.amazonaws.com/springboot-app-githubactions:latest
+
+     - name: Run Trivy vulnerability scanner
+       uses: aquasecurity/trivy-action@0.20.0
+       with:
+          image-ref: '210613553230.dkr.ecr.us-west-1.amazonaws.com/springboot-app-githubactions:latest'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'LOW'  #need to keep CRITICAL, HIGH
+
+  deploy:
+    needs: build
+
+    runs-on: ubuntu-latest
+    steps:
+     - name: Checkout
+       uses: actions/checkout@v4
+
+     - name: install-aws-cli-action
+       uses: unfor19/install-aws-cli-action@v1
+      
+     - name: Configure AWS credentials
+       uses: aws-actions/configure-aws-credentials@v2
+       with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID}}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-1
+            
+     - name: Update Kube config file 
+       run: aws eks --region us-west-1 update-kubeconfig --name dev-eks-cluster
+       
+     - name: Execute the shell script to deploy application using helm
+       run:  ls && helm uninstall springboot-app && bash deploy-app.sh
+
+     - name: Check the deployment status
+       run: sleep 20 && kubectl get all && kubectl get ingress
