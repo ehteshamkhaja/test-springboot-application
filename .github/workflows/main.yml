@@ -94,7 +94,7 @@ jobs:
     - name: Terraform Init
       run: cd eks && terraform init
 
-
+    
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       run: cd eks && terraform plan -input=false
@@ -146,49 +146,19 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=sonarscan-project_sonarscan-project
-
-     - name: Build and Push Docker Image
-       uses: mr-smithers-excellent/docker-build-push@v4
-       with:
-        image: khajaehtesham/springboot-app
-        tag: latest
-        registry: docker.io
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-
-     - name: Run Trivy vulnerability scanner
-       uses: aquasecurity/trivy-action@0.20.0
-       with:
-          image-ref: 'khajaehtesham/springboot-app'
-          format: 'table'
-          exit-code: '1'
-          ignore-unfixed: true
-          vuln-type: 'os,library'
-          severity: 'CRITICAL,HIGH'
-
-  deploy:
-    needs: build
-
-    runs-on: ubuntu-latest
-    steps:
-     - name: Checkout
-       uses: actions/checkout@v4
-
-     - name: install-aws-cli-action
-       uses: unfor19/install-aws-cli-action@v1
-      
+     
      - name: Configure AWS credentials
        uses: aws-actions/configure-aws-credentials@v2
        with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID}}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-west-1
-            
-     - name: Update Kube config file 
-       run: aws eks --region us-west-1 update-kubeconfig --name dev-eks-cluster
-       
-     - name: Execute the shell script to deploy application using helm
-       run:  ls && helm uninstall springboot-app && bash deploy-app.sh
-
-     - name: Check the deployment status
-       run: sleep 20 && kubectl get all && kubectl get ingress
+          
+     - name: Build and Push Docker Image
+       uses: mr-smithers-excellent/docker-build-push@v4
+       with:
+        image: 210613553230.dkr.ecr.us-west-1.amazonaws.com/springboot-app-githubactions
+        tag: latest
+        registry: docker.io
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
