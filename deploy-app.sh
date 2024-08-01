@@ -23,14 +23,14 @@ lbhelmname=`helm list | grep $lbhelm`
 echo $lbhelmname
 albcheck=`helm list | grep $lbhelmname`
 
-if [ -z $albcheck ]
-then 
+#if [ -z $albcheck ]
+#then 
   
-  helm install $lbhelm eks/aws-load-balancer-controller  -n kube-system --set clusterName=$cluster_name  --set serviceAccount.create=false  --set serviceAccount.name=aws-load-balancer-controller --set region=us-west-1 --set vpcId=vpc-06a9dc1f8d2f9a5b1
-else
-  helm uninstall $lbhelm
-  helm install $lbhelm eks/aws-load-balancer-controller  -n kube-system --set clusterName=$cluster_name  --set serviceAccount.create=false  --set serviceAccount.name=aws-load-balancer-controller --set region=us-west-1 --set vpcId=vpc-06a9dc1f8d2f9a5b1
-fi 
+#  helm install $lbhelm eks/aws-load-balancer-controller  -n kube-system --set clusterName=$cluster_name  --set serviceAccount.create=false  --set serviceAccount.name=aws-load-balancer-controller --set region=us-west-1 --set vpcId=vpc-06a9dc1f8d2f9a5b1
+#else
+#  helm uninstall $lbhelm
+#  helm install $lbhelm eks/aws-load-balancer-controller  -n kube-system --set clusterName=$cluster_name  --set serviceAccount.create=false  --set serviceAccount.name=aws-load-balancer-controller --set region=us-west-1 --set vpcId=vpc-06a9dc1f8d2f9a5b1
+#fi 
 
 # helm install aws-load-balancer-controller eks/aws-load-balancer-controller  -n kube-system --set clusterName=$cluster_name  --set serviceAccount.create=false  --set serviceAccount.name=aws-load-balancer-controller --set region=us-west-1 --set vpcId=vpc-06a9dc1f8d2f9a5b1
 
