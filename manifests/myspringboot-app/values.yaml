@@ -2,7 +2,7 @@ replicas: 2
 name: springboot-app
 
 image:
-  repository: 210613553230.dkr.ecr.us-west-1.amazonaws.com/springboot-app-githubactions   # change this to the one with your account id and repo name
+  repositorynames: 210613553230.dkr.ecr.us-west-1.amazonaws.com/springboot-app-githubactions   # change this to the one with your account id and repo name
   tag: latest
 
 container:
