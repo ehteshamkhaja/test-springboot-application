@@ -33,6 +33,8 @@ jobs:
           aws sts get-caller-identity
 
   gitleak-scan:
+    
+    needs: AssumeRoleAndCallIdentity
 
     name: gitleaks
     runs-on: ubuntu-latest
@@ -116,7 +118,7 @@ jobs:
          docker tag springboot-app-githubactions:latest 210613553230.dkr.ecr.us-west-1.amazonaws.com/springboot-app-githubactions:latest
          docker push 210613553230.dkr.ecr.us-west-1.amazonaws.com/springboot-app-githubactions:latest
 
-      - name: Run Trivy vulnerability scanner
+      - name: Scan Docker Image using Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@0.20.0
         with:
           image-ref: '210613553230.dkr.ecr.us-west-1.amazonaws.com/springboot-app-githubactions:latest'
