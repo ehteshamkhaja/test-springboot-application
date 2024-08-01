@@ -11,7 +11,7 @@ spec:
   - host: myspringbootapp.com
     http:
       paths: 
-      - path: /welcome
+      - path: /*         
         pathType: Prefix
         backend:
           service:
