@@ -18,10 +18,10 @@ else
    cd manifests  && helm install $helmrelease myspringboot-app
 fi 
 
-lbhelm=aws-load-balancer-controller
-lbhelmname=`helm list | grep $lbhelm`
-echo $lbhelmname
-albcheck=`helm list | grep $lbhelmname`
+#lbhelm=aws-load-balancer-controller
+#lbhelmname=`helm list | grep $lbhelm`
+#echo $lbhelmname
+#albcheck=`helm list | grep $lbhelmname`
 
 #if [ -z $albcheck ]
 #then 
