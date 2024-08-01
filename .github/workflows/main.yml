@@ -103,29 +103,4 @@ jobs:
           vuln-type: 'os,library'
           severity: 'LOW'
 
-  deploy:
-    needs: appbuild
-
-    runs-on: ubuntu-latest
-    steps:
-     - name: Checkout
-       uses: actions/checkout@v4
-
-     - name: install-aws-cli-action
-       uses: unfor19/install-aws-cli-action@v1
-      
-     - name: Configure AWS credentials
-       uses: aws-actions/configure-aws-credentials@v2
-       with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID}}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-west-1
-            
-     - name: Update Kube config file 
-       run: aws eks --region us-west-1 update-kubeconfig --name dev-eks-cluster
-
-     - name: Execute the shell script to deploy application using helm
-       run:  ls && bash deploy-app.sh
-
-     - name: Check the deployment status
-       run: sleep 20 && kubectl get all && kubectl get ingress
+  
