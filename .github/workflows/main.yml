@@ -112,6 +112,7 @@ jobs:
 
   build:
     
+    needs: terraform
 
     runs-on: ubuntu-latest
 
