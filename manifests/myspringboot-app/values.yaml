@@ -10,6 +10,6 @@ container:
 service:
   name: springboot-app-service
   type: LoadBalancer
-  port: 80
-  targetPort: 9000
+  port: 8080
+ # targetPort: 9000
 
