@@ -7,9 +7,9 @@ helmrelease="springboot-app"
 helm repo add eks https://aws.github.io/eks-charts
 helm repo update eks
 
-helmcheck=`helm list | grep $helmrelease`
+helmcheck=`helm list | grep $helmrelease | tail -1`
 
-if [ -z $helmcheck ]
+if [[ -z $helmcheck ]]
 then
   
   cd manifests  && helm install $helmrelease myspringboot-app
