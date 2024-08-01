@@ -1,3 +1,4 @@
+
 name: 'Scan the code, Build and deploy the java containerized application'
 
 on:
@@ -10,6 +11,7 @@ on:
 
 permissions:
   contents: read
+  id-token: write
 
 jobs:
 
@@ -19,7 +21,7 @@ jobs:
       - name: Git clone the repository
         uses: actions/checkout@v3
 
-      - name: Configure AWS Credentials for China region audience
+      - name: Configure AWS Credentials 
         uses: aws-actions/configure-aws-credentials@v4
         with:
           audience: sts.amazonaws.com
