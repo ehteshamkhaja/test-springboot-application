@@ -18,5 +18,5 @@ spec:
         app: sprintboot-app
     spec:
       containers:
-        - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}" # khajaehtesham/sprintboot-app:latest
+        - image: "{{ .Values.image.repository-name }}:{{ .Values.image.tag }}" # khajaehtesham/sprintboot-app:latest
           name: "{{ .Values.container.name }}"
