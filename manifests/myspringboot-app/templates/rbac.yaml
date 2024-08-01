@@ -2,7 +2,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: {{ template "aws-load-balancer-controller.fullname" . }}-leader-election-role
+  name: alb-leader-election-role
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "aws-load-balancer-controller.labels" . | nindent 4 }}
@@ -34,14 +34,14 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: {{ template "aws-load-balancer-controller.fullname" . }}-leader-election-rolebinding
+  name: alb-leader-election-rolebinding
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "aws-load-balancer-controller.labels" . | nindent 4 }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: {{ template "aws-load-balancer-controller.fullname" . }}-leader-election-role
+  name: alb-leader-election-role
 subjects:
 - kind: ServiceAccount
   name: {{ template "aws-load-balancer-controller.serviceAccountName" . }}
@@ -50,7 +50,7 @@ subjects:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: {{ template "aws-load-balancer-controller.fullname" . }}-role
+  name: alb-role
   labels:
     {{- include "aws-load-balancer-controller.labels" . | nindent 4 }}
 rules:
@@ -90,13 +90,13 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: {{ template "aws-load-balancer-controller.fullname" . }}-rolebinding
+  name: alb-rolebinding
   labels:
     {{- include "aws-load-balancer-controller.labels" . | nindent 4 }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: {{ template "aws-load-balancer-controller.fullname" . }}-role
+  name: alb-role
 subjects:
 - kind: ServiceAccount
   name: {{ template "aws-load-balancer-controller.serviceAccountName" . }}
