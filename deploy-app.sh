@@ -7,6 +7,7 @@ helmrelease="springboot-app"
 helm repo add eks https://aws.github.io/eks-charts
 helm repo update eks
 
+helm uninstall $helmrelease
 lbhelm=aws-load-balancer-controller
 lbhelmname=`helm list | grep $lbhelm`
 echo $lbhelmname
