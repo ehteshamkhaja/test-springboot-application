@@ -1,7 +1,6 @@
 
 name: 'Scan the code, Build and deploy the java containerized application'
 
-
 on:
   push:
     branches: [ "master" ]
@@ -27,7 +26,7 @@ jobs:
         with:
           audience: sts.amazonaws.com
           aws-region: us-west-1
-          role-to-assume: arn:aws-cn:iam::210613553230:role/github-id-role
+          role-to-assume: arn:aws:iam::210613553230:role/github-id-role
       # Hello from AWS: WhoAmI
       - name: Sts GetCallerIdentity
         run: |
