@@ -7,7 +7,7 @@ helmrelease="springboot-app"
 helm repo add eks https://aws.github.io/eks-charts
 helm repo update eks
 
-helmcheck=`helm list | grep $helmrelease | tail -1`
+helmcheck=`helm list | grep $helmrelease | awk -F ' ' '{print $1}'`
 
 if [[ -z $helmcheck ]]
 then
