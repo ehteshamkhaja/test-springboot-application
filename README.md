@@ -34,3 +34,8 @@ In the shell script, also i have added step to wait for 20 seconds, so that pods
 
 
 
+We can then test the application using value of address in ingress output. Please find the screenshot from the ingress output to fetch the lb details. 
+
+<img width="1701" alt="image" src="https://github.com/user-attachments/assets/e413f193-0329-4c62-a196-23c82ed2a172">
+
+
