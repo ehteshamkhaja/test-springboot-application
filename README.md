@@ -50,10 +50,15 @@ reference from scan report :
  I have added the command in the pipeline main.yml file to execute the shell script to deploy application using helm charts.
 
 
-Access the below URL to access webpage. 
+To Verify the application in the browser, copy the LB DNS Name and append /welcome at the end, to test the application. please find the screenshot below for reference.
+
+<img width="1488" alt="image" src="https://github.com/user-attachments/assets/524b4b2e-d5ff-4ff9-94e0-d55b7240ec7e">
 
 
 
-<img width="869" alt="image" src="https://github.com/user-attachments/assets/33fa2d63-511f-4098-b6ed-09f3f57898d0">
+
+
+
+
 
 
