@@ -36,6 +36,9 @@ In the shell script, also i have added step to wait for 20 seconds, so that pods
 
 <img width="1060" alt="image" src="https://github.com/user-attachments/assets/1698b5b1-f0d1-4425-a19d-47130760d3df">
 
+LB created as below with the tags in console : 
+
+![image](https://github.com/user-attachments/assets/9590d086-78c7-452f-9b3b-b6316f8dd9c9)
 
 
 We can then test the application using value of address in ingress output. Please find the screenshot from the ingress output above to fetch the lb details.
