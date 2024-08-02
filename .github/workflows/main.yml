@@ -1,4 +1,6 @@
 
+
+
 name: 'Scan the code, Build and deploy the java containerized application'
 
 on:
