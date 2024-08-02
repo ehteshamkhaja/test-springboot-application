@@ -2,14 +2,14 @@ replicas: 2
 name: springboot-app
 
 image:
-  repositorynames: 210613553230.dkr.ecr.us-west-1.amazonaws.com/springboot-app-githubactions   # change this to the one with your account id and repo name
+  repositorynames: 210613553230.dkr.ecr.us-east-2.amazonaws.com/springboot-app-githubactions   # change this to the one with your account id and repo name
   tag: latest
 
 container:
   name: springboot-app
 service:
   name: springboot-app-service
-  type: LoadBalancer
+  type: NodePort
   port: 8080
  # targetPort: 9000
 
