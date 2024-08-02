@@ -1,5 +1,4 @@
 
-
 name: 'Scan the code, Build and deploy the java containerized application'
 
 on:
@@ -27,7 +26,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           audience: sts.amazonaws.com
-          aws-region: us-east-1
+          aws-region: us-east-2
           role-to-assume: arn:aws:iam::210613553230:role/github-id-role
       # Hello from AWS: WhoAmI
       - name: Sts GetCallerIdentity
@@ -108,23 +107,23 @@ jobs:
          uses: aws-actions/configure-aws-credentials@v4
          with:
           audience: sts.amazonaws.com
-          aws-region: us-east-1
+          aws-region: us-east-2
           role-to-assume: arn:aws:iam::210613553230:role/github-id-role
 
        - name: ECR login
-         run:  aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 210613553230.dkr.ecr.us-east-1.amazonaws.com
+         run:  aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 210613553230.dkr.ecr.us-east-2.amazonaws.com
 
 
        - name: Build and Push Docker Image
          run: |
           docker build -t springboot-app-githubactions .
-          docker tag springboot-app-githubactions:latest 210613553230.dkr.ecr.us-east-1.amazonaws.com/springboot-app-githubactions:latest
-          docker push 210613553230.dkr.ecr.us-east-1.amazonaws.com/springboot-app-githubactions:latest
+          docker tag springboot-app-githubactions:latest 210613553230.dkr.ecr.us-east-2.amazonaws.com/springboot-app-githubactions:latest
+          docker push 210613553230.dkr.ecr.us-east-2.amazonaws.com/springboot-app-githubactions:latest
          
        - name: Scan Docker Image using Trivy vulnerability scanner
          uses: aquasecurity/trivy-action@0.20.0
          with:
-          image-ref: '210613553230.dkr.ecr.us-east-1.amazonaws.com/springboot-app-githubactions:latest'
+          image-ref: '210613553230.dkr.ecr.us-east-2.amazonaws.com/springboot-app-githubactions:latest'
           format: 'table'
           exit-code: '1'
           ignore-unfixed: true
@@ -148,11 +147,11 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           audience: sts.amazonaws.com
-          aws-region: us-east-1
+          aws-region: us-east-2
           role-to-assume: arn:aws:iam::210613553230:role/github-id-role
 
       - name: Update Kube config file 
-        run: aws eks --region us-east-1 update-kubeconfig --name my-eks
+        run: aws eks --region us-east-2 update-kubeconfig --name my-eks
 
       - name: Execute the shell script to deploy application using helm
         run:  ls && bash deploy-app.sh
