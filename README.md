@@ -24,9 +24,12 @@ sonarscan (to perform the code coverage with expectation criteria of 85% as thre
 appbuild ( to build the application and create the artifacts, create the docker image and push to ECR )
 deploy ( this would call the shell script as requested, which is placed at the root directory with name app-deploy.sh , this script has the steps to use helm and deploy the application. Here i have added the checks to avoid the release names if already present to delete and recreate, as we cannot have same release name more than once, else the pipeline will break )
 
+<img width="366" alt="image" src="https://github.com/user-attachments/assets/722b8edc-9302-48e7-80d9-eb5a5bc52872">
+
+
 In the shell script, also i have added step to wait for 20 seconds, so that pods are completely up and we can see the output as running as expected. I have also added the ingress output to see the alb added in ADDRESS field, please find the screenshot below for reference. 
 
 <img width="1060" alt="image" src="https://github.com/user-attachments/assets/1698b5b1-f0d1-4425-a19d-47130760d3df">
 
 
-<img width="366" alt="image" src="https://github.com/user-attachments/assets/722b8edc-9302-48e7-80d9-eb5a5bc52872">
+
