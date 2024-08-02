@@ -19,11 +19,15 @@ Implementation:
 
 I have ensured the below steps in sequence for the application build process and create the docker images. 
 
-AssumeRoleandcallidentity ( to authenticate to the aws cloud without access key and secret key ) 
+AssumeRoleandcallidentity ( to authenticate to the aws cloud without access key and secret key ) .
+
 gitleaks ( to check if there are any hardcoded secrets or values in git repo. 
-sonarscan (to perform the code coverage with expectation criteria of 85% as threshold value) 
-appbuild ( to build the application and create the artifacts, create the docker image and push to ECR )
-deploy ( this would call the shell script as requested, which is placed at the root directory with name app-deploy.sh , this script has the steps to use helm and deploy the application. Here i have added the checks to avoid the release names if already present to delete and recreate, as we cannot have same release name more than once, else the pipeline will break )
+
+sonarscan (to perform the code coverage with expectation criteria of 85% as threshold value) .
+
+appbuild ( to build the application and create the artifacts, create the docker image and push to ECR ).
+
+deploy ( this would call the shell script as requested, which is placed at the root directory with name app-deploy.sh , this script has the steps to use helm and deploy the application. Here i have added the checks to avoid the release names if already present to delete and recreate, as we cannot have same release name more than once, else the pipeline will break ).
 
 <img width="366" alt="image" src="https://github.com/user-attachments/assets/722b8edc-9302-48e7-80d9-eb5a5bc52872">
 
