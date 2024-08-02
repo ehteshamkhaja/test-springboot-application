@@ -18,6 +18,6 @@ then
   
   cd manifests  && helm install $releasename myspringboot-app
 else 
-   helm uninstall $helmrelease
+   helm uninstall $releasename
    cd manifests  && helm install $releasename myspringboot-app
 fi 
