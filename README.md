@@ -10,7 +10,7 @@ Pre-requisites:
 
 3. Created the sonar cloud account in sonarcloud.io to perform the code coverage of the code, with the project details, also created the sonar token to authenticate with github.
 4. Created the secrets under repository settings for sonar token.
-5. Also created the custom quality gates with the threshold value of 85% as requested, to meet the required criteria as requested. please find the screenshot below for threshold value for reference.
+5. Also created the custom quality gates and set as default with the threshold value of 85% as requested, to meet the required criteria as requested. please find the screenshot below for threshold value for reference.
 
  <img width="1701" alt="image" src="https://github.com/user-attachments/assets/ecebaf68-c478-4e4c-ba56-8090fb613256">
 
