@@ -34,8 +34,10 @@ In the shell script, also i have added step to wait for 20 seconds, so that pods
 
 
 
-We can then test the application using value of address in ingress output. Please find the screenshot from the ingress output to fetch the lb details. 
+We can then test the application using value of address in ingress output. Please find the screenshot from the ingress output above to fetch the lb details.
 
-<img width="1701" alt="image" src="https://github.com/user-attachments/assets/e413f193-0329-4c62-a196-23c82ed2a172">
+Below is the URL to access our springboot application, we need to append the /welcome at the end of the url. 
+
+![image](https://github.com/user-attachments/assets/d26ac199-2dad-4563-a317-4d03e85cbe35)
 
 
