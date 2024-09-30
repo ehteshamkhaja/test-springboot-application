@@ -50,7 +50,7 @@ jobs:
   
   sonarscan:
     
-    needs: gitleak-scan
+  #  needs: gitleak-scan
 
     runs-on: ubuntu-latest
 
