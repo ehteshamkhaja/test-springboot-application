@@ -9,6 +9,8 @@ on:
       - 'README.md'
   pull_request:
 
+inputs:
+  file: $file
 permissions:
   contents: read
   id-token: write
