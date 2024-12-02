@@ -1,0 +1,65 @@
+name: CICD Orchestrator
+
+permissions:
+  id-token: write
+  contents: write
+  security-events: write
+  actions: read
+  pull-requests: write
+
+on:
+
+  workflow_dispatch:
+
+jobs:
+  
+  Identify_Environment:
+    name: "Identifying Environment"
+    runs-on: ubuntu-latest
+    outputs:
+      target_env: ${{ steps.set_env.outputs.env }}
+    steps:
+      - name: Determine Target Environment
+        id: set_env
+        run: | 
+          echo "env=dev" >> $GITHUB_OUTPUT
+        shell: bash
+      
+  ci:
+    name: "Continuous Integration"
+    needs: Identify_Environment
+    uses: ehteshamkhaja/enterprise-reusable-workflows/.github/workflows/multijob-maven-continuous-integration.yml@feature/cicd-publish
+    with:
+      AWS_REGION: ${{ vars.AWS_REGION }}
+      AWS_IAM_ROLE: ${{ vars.AWS_IAM_ROLE }}
+      SONAR_PROJECT_KEY: ${{ vars.SONAR_PROJECT_KEY }}
+      JAVA_VERSION_APP: ${{ vars.JAVA_VERSION_APP }}
+      JAVA_VERSION_SONAR: ${{ vars.JAVA_VERSION_SONAR }}
+      ENVIRONMENT: ${{ needs.Identify_Environment.outputs.target_env }}
+      PUBLISH_IMAGE: ${{ vars.PUBLISH_IMAGE }}
+      K8S_MANIFEST_REPO: ${{ vars.K8S_MANIFEST_REPO }}
+    secrets:
+      AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+      AWS_ECR: ${{ secrets.AWS_ECR }}
+      DEVOPS_WORKFLOW_TOKEN: ${{ secrets.DEVOPS_WORKFLOW_TOKEN }}
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      JFROG_USERNAME: ${{ secrets.JFROG_USERNAME }}
+      JFROG_ARTIFACTORY_ACCESS_TOKEN: ${{ secrets.JFROG_ARTIFACTORY_ACCESS_TOKEN }}
+      SONAR_ORGANIZATION_KEY: ${{ secrets.SONAR_ORGANIZATION_KEY }}
+  
+  deploy: 
+    name: "Deploy Application"
+    needs: [ ci, Identify_Environment ]
+    uses: ehteshamkhaja/enterprise-reusable-workflows/.github/workflows/.github/workflows/helm-release-orchestrator.yml@feature/cicd-publish
+    with:
+      AWS_REGION: ${{ vars.AWS_REGION }}
+      AWS_IAM_ROLE: ${{ vars.AWS_IAM_ROLE }}
+      K8S_MANIFEST_REPO: ${{ vars.K8S_MANIFEST_REPO }}
+      K8S_MANIFEST_FILE: ${{ vars.K8S_MANIFEST_FILE }}
+      BRANCH_TAG: ${{ needs.ci.outputs.IMAGE_TAG }}
+    secrets:
+      AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+      AWS_K8S_CLUSTER: ${{ secrets.AWS_K8S_CLUSTER }}
+      AWS_K8S_NAME_SPACE: ${{ secrets.AWS_K8S_NAME_SPACE }}
+      DEVOPS_WORKFLOW_TOKEN: ${{ secrets.DEVOPS_WORKFLOW_TOKEN }}
