@@ -108,8 +108,8 @@ jobs:                          # jobs to execute in the pipeline.
            repository: 'ehteshamkhaja/jenkins-eks-springboot-app'
            ref: 'master'
            path: 'deploy-manifests'
-           token: ${{ secrets.GITHUB_TOKEN }}
-           persist-credentials: true     
+           token: ${{ secrets.SECRET_PAT }}
+         #  persist-credentials: true     
 
        - name: Update Image version in yaml file
          run: |
@@ -118,12 +118,13 @@ jobs:                          # jobs to execute in the pipeline.
 
 
        - name: Commit and Push Changes
-         run: |
+         uses: actions/checkout@v4
+       - run: |
            cd  deploy-manifests
            ls -al
            cat  eks-deploy-k8s.yaml
-           git config user.name "khaja ehtesham"
-           git config user.email "ehteshamkhaja@gmail.com"
+           git config user.name "github-actions[bot]"
+           git config user.email "github-actions[bot]@users.noreply.github.com"
            git add -A
            git commit -m "Update Image to ${{ github.sha }}" || true
            git push 
