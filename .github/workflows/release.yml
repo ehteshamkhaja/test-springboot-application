@@ -106,7 +106,7 @@ jobs:                          # jobs to execute in the pipeline.
          uses: actions/checkout@v4
          with:
            repository: 'ehteshamkhaja/jenkins-eks-springboot-app'
-           ref: 'main'
+           ref: 'master'
            path: 'deploy-manifests'
            token: ${{ secrets.GITHUB_TOKEN }}
            persist-credentials: true     
