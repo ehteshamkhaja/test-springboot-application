@@ -121,7 +121,7 @@ jobs:                          # jobs to execute in the pipeline.
          run: |
            cd  deploy-manifests
            ls -al
-           cat  deploy-manifests/eks-deploy-k8s.yaml
+           cat  eks-deploy-k8s.yaml
            git config user.name "khaja ehtesham"
            git config user.email "ehteshamkhaja@gmail.com"
            git add -A
