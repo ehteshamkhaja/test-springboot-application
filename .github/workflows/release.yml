@@ -118,7 +118,9 @@ jobs:                          # jobs to execute in the pipeline.
 
 
        - name: Commit and Push Changes
-         run: | 
+         run: |
+           cd  deploy-manifests
+           ls -al
            cat  deploy-manifests/eks-deploy-k8s.yaml
            git config user.name "khaja ehtesham"
            git config user.email "ehteshamkhaja@gmail.com"
