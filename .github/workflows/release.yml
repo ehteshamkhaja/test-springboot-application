@@ -122,7 +122,7 @@ jobs:                          # jobs to execute in the pipeline.
            cat  deploy-manifests/eks-deploy-k8s.yaml
            git config user.name "khaja ehtesham"
            git config user.email "ehteshamkhaja@gmail.com"
-           git add deploy-manifests/eks-deploy-k8s.yaml
+           git add -A
            git commit -m "Update Image to ${{ github.sha }}" || true
            git push 
          shell: bash
