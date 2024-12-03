@@ -58,20 +58,12 @@ jobs:                          # jobs to execute in the pipeline.
 
  appbuild:
 
+  
 
      needs: gitleak-scan
 
      runs-on: ubuntu-latest
-     # permissions: 
-     # deployments: write               # Job-level permissions configuration starts here
-     # id-token: write
-     # contents: write           # 'write' access to repository contents
-     # pull-requests: write      # 'write' access to pull requests
-     # checks: read
-
      steps:
-
-      
 
        - uses: actions/checkout@v4
 
@@ -97,7 +89,7 @@ jobs:                          # jobs to execute in the pipeline.
          run:  aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 210613553230.dkr.ecr.us-west-2.amazonaws.com      
 
 
-        - name: Build and Push Docker Image
+       - name: Build and Push Docker Image
          run: |                                      
           docker build -t springboot-app-githubactions .
           docker tag springboot-app-githubactions:latest 210613553230.dkr.ecr.us-west-2.amazonaws.com/springboot-app-githubactions:${{ github.sha }}
