@@ -72,8 +72,20 @@ jobs:                          # jobs to execute in the pipeline.
 
      steps:
 
+      
+
        - uses: actions/checkout@v4
 
+       - name: Set up JDK 17                 # to install java 17 version.
+         uses: actions/setup-java@v4
+         with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+
+       - name: Build with Maven               
+         run: mvn -B package --file pom.xml
 
        - name: Configure AWS Credentials                  
          uses: aws-actions/configure-aws-credentials@v4
@@ -82,14 +94,14 @@ jobs:                          # jobs to execute in the pipeline.
           aws-region: us-west-2
           role-to-assume: arn:aws:iam::210613553230:role/github-id-role
 
-      # - name: ECR login
-      #   run:  aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 210613553230.dkr.ecr.us-west-2.amazonaws.com      
+       - name: ECR login
+         run:  aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 210613553230.dkr.ecr.us-west-2.amazonaws.com      
 
 
-      # - name: Build and Push Docker Image
-      #   run: |                                      
-      #    docker build -t springboot-app-githubactions .
-      #    docker tag springboot-app-githubactions:latest 210613553230.dkr.ecr.us-west-2.amazonaws.com/springboot-app-githubactions:${{ github.sha }}
+        - name: Build and Push Docker Image
+         run: |                                      
+          docker build -t springboot-app-githubactions .
+          docker tag springboot-app-githubactions:latest 210613553230.dkr.ecr.us-west-2.amazonaws.com/springboot-app-githubactions:${{ github.sha }}
       #    docker push 210613553230.dkr.ecr.us-west-2.amazonaws.com/springboot-app-githubactions:${{ github.sha }}
          
        #- name: Scan Docker Image using Trivy vulnerability scanner
@@ -108,12 +120,12 @@ jobs:                          # jobs to execute in the pipeline.
            repository: 'ehteshamkhaja/jenkins-eks-springboot-app'
            ref: 'master'
            path: 'deploy-manifests'
-           token: ${{ secrets.SECRET_PAT }}
+          # token: ${{ secrets.SECRET_PAT }}
          #  persist-credentials: true     
 
        - name: Update Image version in yaml file
          run: |
-          sed -i 's|94210613553230.dkr.ecr.us-west-2.amazonaws.com/springboot-app-githubactions:.*|210613553230.dkr.ecr.us-west-2.amazonaws.com/springboot-app-githubactions:${{ github.sha }}|' deploy-manifests/eks-deploy-k8s.yaml 
+          sed -i 's|210613553230.dkr.ecr.us-west-2.amazonaws.com/springboot-app-githubactions:.*|210613553230.dkr.ecr.us-west-2.amazonaws.com/springboot-app-githubactions:${{ github.sha }}|' deploy-manifests/eks-deploy-k8s.yaml 
          shell: bash
 
 
