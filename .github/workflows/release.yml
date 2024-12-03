@@ -34,7 +34,7 @@ jobs:                          # jobs to execute in the pipeline.
       with:
           audience: sts.amazonaws.com
           aws-region: us-west-2
-          role-to-assume: arn:aws:iam::944283277918:role/github-id-role     
+          role-to-assume: arn:aws:iam::210613553230:role/github-id-role     
             
     - name: Sts GetCallerIdentity              #verify the authentication successfull or not?
       run: |
@@ -90,22 +90,22 @@ jobs:                          # jobs to execute in the pipeline.
          with:
           audience: sts.amazonaws.com
           aws-region: us-west-2
-          role-to-assume: arn:aws:iam::944283277918:role/github-id-role
+          role-to-assume: arn:aws:iam::210613553230:role/github-id-role
 
       # - name: ECR login
-      #   run:  aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 944283277918.dkr.ecr.us-west-2.amazonaws.com      
+      #   run:  aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 210613553230.dkr.ecr.us-west-2.amazonaws.com      
 
 
       # - name: Build and Push Docker Image
       #   run: |                                      
       #    docker build -t springboot-app-githubactions .
-      #    docker tag springboot-app-githubactions:latest 944283277918.dkr.ecr.us-west-2.amazonaws.com/springboot-app-githubactions:${{ github.sha }}
-      #    docker push 944283277918.dkr.ecr.us-west-2.amazonaws.com/springboot-app-githubactions:${{ github.sha }}
+      #    docker tag springboot-app-githubactions:latest 210613553230.dkr.ecr.us-west-2.amazonaws.com/springboot-app-githubactions:${{ github.sha }}
+      #    docker push 210613553230.dkr.ecr.us-west-2.amazonaws.com/springboot-app-githubactions:${{ github.sha }}
          
        #- name: Scan Docker Image using Trivy vulnerability scanner
        #  uses: aquasecurity/trivy-action@0.20.0  
        #  with:
-       #   image-ref: '944283277918.dkr.ecr.us-west-2.amazonaws.com/springboot-app-githubactions:${{ github.sha }}'
+       #   image-ref: '210613553230.dkr.ecr.us-west-2.amazonaws.com/springboot-app-githubactions:${{ github.sha }}'
        #   format: 'table'
        #   exit-code: '1'
        #   ignore-unfixed: true
@@ -123,7 +123,7 @@ jobs:                          # jobs to execute in the pipeline.
 
        - name: Update Image version in yaml file
          run: |
-          sed -i 's|94944283277918.dkr.ecr.us-west-2.amazonaws.com/springboot-app-githubactions:.*|944283277918.dkr.ecr.us-west-2.amazonaws.com/springboot-app-githubactions:${{ github.sha }}|' manifest/deployment.yml 
+          sed -i 's|94210613553230.dkr.ecr.us-west-2.amazonaws.com/springboot-app-githubactions:.*|210613553230.dkr.ecr.us-west-2.amazonaws.com/springboot-app-githubactions:${{ github.sha }}|' manifest/deployment.yml 
          shell: bash
 
 
