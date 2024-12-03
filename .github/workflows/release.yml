@@ -1,5 +1,4 @@
 
-
 name: cicd pipeline      # name of the pipeline.
 on:                      # when need to run the pipeline.
   push:
