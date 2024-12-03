@@ -74,16 +74,6 @@ jobs:                          # jobs to execute in the pipeline.
 
        - uses: actions/checkout@v4
 
-       - name: Set up JDK 17                 # to install java 17 version.
-         uses: actions/setup-java@v4
-         with:
-          java-version: '17'
-          distribution: 'temurin'
-          cache: maven
-
-
-       - name: Build with Maven               
-         run: mvn -B package --file pom.xml
 
        - name: Configure AWS Credentials                  
          uses: aws-actions/configure-aws-credentials@v4
