@@ -113,7 +113,7 @@ jobs:                          # jobs to execute in the pipeline.
 
        - name: Update Image version in yaml file
          run: |
-          sed -i 's|94210613553230.dkr.ecr.us-west-2.amazonaws.com/springboot-app-githubactions:.*|210613553230.dkr.ecr.us-west-2.amazonaws.com/springboot-app-githubactions:${{ github.sha }}|' manifest/deployment.yml 
+          sed -i 's|94210613553230.dkr.ecr.us-west-2.amazonaws.com/springboot-app-githubactions:.*|210613553230.dkr.ecr.us-west-2.amazonaws.com/springboot-app-githubactions:${{ github.sha }}|' deploy-manifests/eks-deploy-k8s.yaml 
          shell: bash
 
 
