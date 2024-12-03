@@ -111,7 +111,7 @@ jobs:                          # jobs to execute in the pipeline.
            repository: 'ehteshamkhaja/jenkins-eks-springboot-app'
            ref: 'master'
            path: 'deploy-manifests'
-          # token: ${{ secrets.SECRET_PAT }}
+           token: ${{ secrets.SECRET_PAT }}
          #  persist-credentials: true     
 
        - name: Update Image version in yaml file
